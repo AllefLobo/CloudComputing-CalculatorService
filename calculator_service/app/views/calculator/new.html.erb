@@ -1,0 +1,25 @@
+<h1>Calculator</h1>
+
+Hello,
+Today is <%= Time.now.strftime('%A') %>.
+A great time to make some calculations...
+
+<form accept-charset="UTF-8" action="/calculator/new" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <input name="authenticity_token" type="hidden" value="J7CBxfHalt49OSHp27hblqK20c9PgwJ108nDHX/8Cts=" />
+
+  <input type="text" name="firstValue" value="<%= @firstValue%>">
+
+  <select name="type">
+    <option value="sum" <% if @type == "sum"  %> <%= "selected" %> <% end   %> > +  </option>
+    <option value="subtract" <% if @type == "subtract"  %> <%= "selected" %> <% end   %> > - </option>
+    <option value="multiply" <% if @type == "multiply"  %> <%= "selected" %> <% end   %> > * </option>
+    <option value="divide" <% if @type == "divide"  %> <%= "selected" %> <% end   %> > / </option>
+  </select>
+
+  <input type="text" name="secondValue" value="<%= @secondValue%>">
+  <input type="submit" value="calculate">
+  Result:<%= @result %>
+
+</form>
+
