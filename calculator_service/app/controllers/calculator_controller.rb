@@ -46,8 +46,8 @@ class CalculatorController < ApplicationController
     "altura" => @altura
   	}
 		response = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
-
-		@imc = response.body
+		responseJson = JSON.parse(response.body)
+		@imc = responseJson["imc"]
 	end
 
 end
