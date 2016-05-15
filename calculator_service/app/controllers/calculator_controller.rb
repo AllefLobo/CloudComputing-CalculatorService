@@ -1,4 +1,5 @@
 require 'net/http'
+require 'json'
 
 class CalculatorController < ApplicationController
 
@@ -50,9 +51,9 @@ class CalculatorController < ApplicationController
 
 		uri = URI.parse(url)
 		http = Net::HTTP.new(uri.host, uri.port)
-		response = http.request(request)
+		response = JSON.parse( (http.request(request)).body )
 
-		@resultadoImc = response.body
+		@resultadoImc = response["imc"]
 	end
 
 end
