@@ -40,12 +40,12 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		uri = URI.parse("http://aviator1.cloudapp.net/imc/calcular")
+		uri = URI.parse("http://ec2-52-37-59-164.us-west-2.compute.amazonaws.com:3000/calculator")
 
 		http = Net::HTTP.new(uri.host, uri.port)
 
 		request = Net::HTTP::Post.new(uri.request_uri)
-		request.set_form_data({"peso"=> @peso, "altura"=> @altura})
+		request.set_form_data({"type"=> "sum", "firstValue"=> 10 , "secondValue" => 3})
 
 		response = http.request(request)
 		@imc = render :json => response.body
