@@ -26,24 +26,22 @@
 
 
       <div id="content">
-        <h2>Usar a calculadora prática</h3>
+        <h2>Usar a calculadora do imc</h3>
 
-          <form accept-charset="UTF-8" action="/calculator/new" method="get">
+          <form accept-charset="UTF-8" action="/calculator/imc" method="get">
             <input name="utf8" type="hidden" value="&#x2713;" />
             <input name="authenticity_token" type="hidden" value="J7CBxfHalt49OSHp27hblqK20c9PgwJ108nDHX/8Cts=" />
 
-            <input type="text" name="firstValue" value="<%= @firstValue%>">
+            Peso:
+            <input type="text" name="peso" value="<%= @peso%>">
+          </br>
 
-            <select name="type">
-              <option value="sum" <% if @type == "sum"  %> <%= "selected" %> <% end   %> > +  </option>
-              <option value="subtract" <% if @type == "subtract"  %> <%= "selected" %> <% end   %> > - </option>
-              <option value="multiply" <% if @type == "multiply"  %> <%= "selected" %> <% end   %> > * </option>
-              <option value="divide" <% if @type == "divide"  %> <%= "selected" %> <% end   %> > / </option>
-            </select>
+            Altura:
+            <input type="text" name="altura" value="<%= @altura%>">
+          </br>
 
-            <input type="text" name="secondValue" value="<%= @secondValue%>">
-            <input type="submit" value="calculate">
-            Result:<%= @result %>
+            <input type="submit" value="calcular">
+            IMC:<%= @imc %>
 
           </form>
 

@@ -1,3 +1,6 @@
+require "uri"
+require "net/http"
+
 class CalculatorController < ApplicationController
 
 	def new
@@ -33,5 +36,17 @@ class CalculatorController < ApplicationController
 
   def index
   end
+
+	def imc
+		@peso = params["peso"].to_f
+		@altura = params["altura"].to_f
+
+		params =  {
+    'peso' => @peso,
+    'altura' => @altura
+  	}
+		response = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
+		@imc = response["imc"]
+	end
 
 end
