@@ -5,15 +5,15 @@
        <div id="menu">
          <h2>Menu</h2>
          <ul>
-           <li>Paginal Inicial</li>
-           <li><%= link_to "Usar a calculadora pratica", "calculator/new" %></li>
+           <li><%= link_to "Página Inicial", "calculator/" %></li>
+           <li><%= link_to "Usar a calculadora prática", "calculator/new" %></li>
            <li>Usar calculadora de imc</li>
            <li><%= link_to "Documentação da API", "/doc/app/index.html" %></li>
          </ul>
        </div>
 
        <div id="content">
-         <h2>Pagina Inicial</h3>
+         <h2>Página Inicial</h3>
 
          <p>Trabalho de implementação para a cadeira de Computação em Nuvem. Foi desenvolvido um web service de calculadora.</p>
 
@@ -48,9 +48,9 @@
          <code>
            {
              "type" : "sum",
-             "firstValue": 2,
-             "secondValue": 4,
-             "result": 6
+             "firstValue": 2.0,
+             "secondValue": 4.0,
+             "result": 6.0
            }
          </code>
 
@@ -79,7 +79,7 @@
 
          <h3>Exceções de result</h3>
            <ul>
-             <li>Divisão por zero: Toda divisão por zero (0) retornará result = 0</li>
+             <li>Divisão por zero: Toda divisão por zero (0) retornará result = 0.0 </li>
            </ul>
 
        </div>
