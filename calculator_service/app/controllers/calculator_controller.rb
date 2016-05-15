@@ -1,4 +1,5 @@
 require 'net/http'
+require "uri"
 
 class CalculatorController < ApplicationController
 
@@ -44,7 +45,7 @@ class CalculatorController < ApplicationController
 		uri = URI('http://aviator1.cloudapp.net/imc/calcular')
 		response = Net::HTTP.post_form(uri, "peso" => @peso, "altura" => @altura )
 
-		@imc = response["imc"]
+		@imc = response.body
 	end
 
 end
