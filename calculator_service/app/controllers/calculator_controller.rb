@@ -1,5 +1,4 @@
 require 'net/http'
-require 'net/https'
 
 class CalculatorController < ApplicationController
 
