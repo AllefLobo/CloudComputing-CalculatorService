@@ -42,11 +42,9 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		params = {:peso => @peso, :altura => @altura}
+		response = curl -H "Content-Type: application/json" -X POST -d '{"peso": 94, "altura":1.64}' http://aviator1.cloudapp.net/imc/calcular
 
-		response = post "http://aviator1.cloudapp.net/imc/calcular", params.to_json, {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json'}
-
-		@imc = response.body
+		@imc = response
 	end
 
 end
