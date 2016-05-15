@@ -1,5 +1,6 @@
 require "uri"
 require "net/http"
+require 'json'
 
 class CalculatorController < ApplicationController
 
@@ -47,7 +48,7 @@ class CalculatorController < ApplicationController
   	}
 		response = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
 		responseJson = JSON.parse(response.body)
-		@imc = responseJson["imc"]
+		@imc = responseJson
 	end
 
 end
