@@ -1,5 +1,5 @@
-require 'net/http'
 require "uri"
+require "net/http"
 
 class CalculatorController < ApplicationController
 
@@ -41,20 +41,13 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
+		params = {
+    "peso" => @peso,
+    "altura" => @altura
+  	}
+		response = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
 
-
-		uri = URI('=http://aviator1.cloudapp.net/imc/calcular')
-		req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
-		req.body = {:peso=> @peso, :altura=> @altura}.to_json
-		res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-  		http.request(req)
-		end
-
-
-		#uri = URI('http://aviator1.cloudapp.net/imc/calcular')
-		#response = Net::HTTP.post_form(uri, "peso" => @peso, "altura" => @altura )
-
-		@imc = res
+		@imc = response.body["imc"]
 	end
 
 end
