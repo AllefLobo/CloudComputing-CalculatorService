@@ -1,7 +1,3 @@
-require "uri"
-require "net/http"
-require 'json'
-
 class CalculatorController < ApplicationController
 
 	def new
@@ -42,9 +38,6 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		response = curl -H "Content-Type: application/json" -X POST -d '{"peso": 94, "altura":1.64}' http://aviator1.cloudapp.net/imc/calcular
-
-		@imc = response
 	end
 
 end
