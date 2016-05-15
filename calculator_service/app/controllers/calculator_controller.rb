@@ -47,7 +47,7 @@ class CalculatorController < ApplicationController
   	}
 		response = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
 
-		@imc = response["imc"]
+		@imc = response.body
 	end
 
 end
