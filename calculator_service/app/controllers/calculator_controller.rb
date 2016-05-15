@@ -41,20 +41,20 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		uri = URI.parse("http://aviator1.cloudapp.net/imc/calcular")
-		http = Net::HTTP.new(uri.host, uri.port)
-		http.use_ssl = true
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		request = Net::HTTP::Post.new("/v1.1/auth")
-		request.add_field('Content-Type', 'application/json')
-		request.body = {"peso" => @peso, "altura" => @altura}
-		response = http.request(request)
+
+
+		uri = URI('=http://aviator1.cloudapp.net/imc/calcular')
+		req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
+		req.body = {"peso": @peso, "altura": @altura}.to_json
+		res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+  		http.request(req)
+		end
 
 
 		#uri = URI('http://aviator1.cloudapp.net/imc/calcular')
 		#response = Net::HTTP.post_form(uri, "peso" => @peso, "altura" => @altura )
 
-		@imc = response
+		@imc = res
 	end
 
 end
