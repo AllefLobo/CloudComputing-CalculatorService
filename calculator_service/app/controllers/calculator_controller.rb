@@ -48,7 +48,7 @@ class CalculatorController < ApplicationController
 		request.set_form_data({"type"=> "sum", "firstValue"=> 10 , "secondValue" => 3})
 
 		response = http.request(request)
-		@imc = render :json => response.body
+		@resultadoImc = render :json => response.body
 
 	end
 
