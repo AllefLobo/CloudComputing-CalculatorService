@@ -72,6 +72,8 @@
     
     <li ><a href="#method-i-create">#create</a>
     
+    <li ><a href="#method-i-imc">#imc</a>
+    
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
@@ -129,14 +131,71 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-identifier">operation</span> = <span class="ruby-constant">Operation</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:firstValue</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:secondValue</span>])
-  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">operation</span>.<span class="ruby-identifier">calculate</span>()
+              <span class="ruby-ivar">@firstValue</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;firstValue&quot;</span>].<span class="ruby-identifier">to_f</span>
+  <span class="ruby-ivar">@secondValue</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;secondValue&quot;</span>].<span class="ruby-identifier">to_f</span>
+  <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;type&quot;</span>]
+
+              <span class="ruby-keyword">if</span> <span class="ruby-ivar">@secondValue</span> <span class="ruby-operator">==</span> <span class="ruby-value">0.0</span>
+                      <span class="ruby-identifier">result</span> = <span class="ruby-value">0.0</span>
+              <span class="ruby-keyword">else</span>
+                      <span class="ruby-identifier">operation</span> = <span class="ruby-constant">Operation</span>.<span class="ruby-identifier">new</span>( <span class="ruby-ivar">@type</span>, <span class="ruby-ivar">@firstValue</span>, <span class="ruby-ivar">@secondValue</span>)
+                      <span class="ruby-identifier">result</span> = <span class="ruby-identifier">operation</span>.<span class="ruby-identifier">calculate</span>()
+              <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">msg</span> = { <span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>], <span class="ruby-value">:firstValue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:firstValue</span>], <span class="ruby-value">:secondValue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:secondValue</span>], <span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span> }
+    <span class="ruby-identifier">msg</span> = { <span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@type</span>, <span class="ruby-value">:firstValue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@firstValue</span>, <span class="ruby-value">:secondValue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@secondValue</span>, <span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span> }
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">msg</span> }
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-imc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">imc</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="imc-source">
+            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">imc</span>
+        <span class="ruby-ivar">@peso</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;peso&quot;</span>].<span class="ruby-identifier">to_f</span>
+        <span class="ruby-ivar">@altura</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;altura&quot;</span>].<span class="ruby-identifier">to_f</span>
+
+        <span class="ruby-identifier">url</span> = <span class="ruby-string">&quot;http://aviator1.cloudapp.net/imc/calcular&quot;</span>
+        <span class="ruby-identifier">payload</span> = {<span class="ruby-string">&quot;peso&quot;</span>=<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@peso</span>, <span class="ruby-string">&quot;altura&quot;</span>=<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@altura</span>}.<span class="ruby-identifier">to_json</span>
+
+        <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;net/http&#39;</span>
+        <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span>)
+        <span class="ruby-identifier">request</span>.<span class="ruby-identifier">add_field</span> <span class="ruby-string">&quot;Content-Type&quot;</span>, <span class="ruby-string">&quot;application/json&quot;</span>
+        <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span> = <span class="ruby-identifier">payload</span>
+
+        <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">url</span>)
+        <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>)
+        <span class="ruby-identifier">response</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>( (<span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)).<span class="ruby-identifier">body</span> )
+
+        <span class="ruby-ivar">@resultadoImc</span> = <span class="ruby-identifier">response</span>[<span class="ruby-string">&quot;imc&quot;</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -167,7 +226,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -199,14 +258,18 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/controllers/calculator_controller.rb, line 6</span>
       <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@firstValue</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;firstValue&quot;</span>].<span class="ruby-identifier">to_f</span>
   <span class="ruby-ivar">@secondValue</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;secondValue&quot;</span>].<span class="ruby-identifier">to_f</span>
   <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;type&quot;</span>]
 
-  <span class="ruby-identifier">operation</span> = <span class="ruby-constant">Operation</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;type&quot;</span>], <span class="ruby-ivar">@firstValue</span>, <span class="ruby-ivar">@secondValue</span>)
-  <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">operation</span>.<span class="ruby-identifier">calculate</span>()
+              <span class="ruby-keyword">if</span> <span class="ruby-ivar">@secondValue</span> <span class="ruby-operator">==</span> <span class="ruby-value">0.0</span>
+                      <span class="ruby-ivar">@result</span> = <span class="ruby-value">0.0</span>
+              <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">operation</span> = <span class="ruby-constant">Operation</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;type&quot;</span>], <span class="ruby-ivar">@firstValue</span>, <span class="ruby-ivar">@secondValue</span>)
+      <span class="ruby-ivar">@result</span> = <span class="ruby-identifier">operation</span>.<span class="ruby-identifier">calculate</span>()
+              <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
