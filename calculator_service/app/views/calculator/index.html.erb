@@ -1,40 +1,90 @@
-<h1>Calculator Service</h1>
+  <div id="container">
 
-<ul>
-  <li><%= link_to "Usar a calculadora pratica", "calculator/new" %></li>
-  <li><%= link_to "Documentação da API", "/doc/app/index.html" %></li>
-	<li> Para usar o servico</li>
-  <p>
-    1.Mandar requisicao para http://ec2-52-37-59-164.us-west-2.compute.amazonaws.com:3000/calculator com o parametro json:
-	</p.
+       <h2> Calculator Service </h2>
 
+       <div id="menu">
+         <h2>Menu</h2>
+         <ul>
+           <li>Paginal Inicial</li>
+           <li><%= link_to "Usar a calculadora pratica", "calculator/new" %></li>
+           <li>Usar calculadora de imc</li>
+           <li><%= link_to "Documentação da API", "/doc/app/index.html" %></li>
+         </ul>
+       </div>
 
+       <div id="content">
+         <h2>Pagina Inicial</h3>
 
-    {
-          "type" : "",
-          "firstValue" : ,
-          "secondValue":
-    }
+         <p>Trabalho de implementação para a cadeira de Computação em Nuvem. Foi desenvolvido um web service de calculadora.</p>
 
-	<p>
-    "type" - pode receber "sum", "multiply", "subtract" ou "divide" </br>
-    "firstValue" - tipos numericos inteiros ou de pontos fllutuantes(floats) </br>
-    "secondValue"- tipos numericos inteiros ou de pontos fllutuantes(floats)
-  </p> </br>
-  <p>
-  2. Receber response  com o corpo json:
+         <h3>Tecnologias utilizadas</h2>
+           <ul>
+             <li>Backend: <a href="http://rubyonrails.org/">Ruby on Rails</a> </li>
+             <li>Servidor: <a href="https://www.phusionpassenger.com/">Passenger</a> </li>
+             <li>FrontEnd: HTML, CSS, Javascript</li>
+             <li>Tecnologia de Integração: <a href="http://www.json.org/">JSON</a> </li>
+             <li> Arquitetura: <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a></li>
+           </ul>
 
-    {
-          "type" : "",
-          "firstValue" : ,
-          "secondValue": ,
-          "result":
-    }
-  </p> </br>
-	<p>
-    "type" - pode receber "sum", "multiply", "subtract" ou "divide" </br>
-    "firstValue" - tipos numericos inteiros ou de pontos fllutuantes(floats) </br>
-    "secondValue"- tipos numericos inteiros ou de pontos fllutuantes(floats) </br>
-    "result" - resultado da operação em float
-  </p>
-</ul>
+         <h3>Acessando o Serviço</h3>
+
+         <p>Para usar o serviço, uma mensagem no formato JSON deve ser passada no
+           corpo da requisição para <a href="http://ec2-52-37-59-164.us-west-2.compute.amazonaws.com:3000/calculator">
+             http://ec2-52-37-59-164.us-west-2.compute.amazonaws.com:3000/calculator</a>
+            com o método POST. Um exemplo de mensagem pode ser visto a seguir:</p>
+
+         <code>
+           {
+             "type" : "sum",
+             "firstValue": 2,
+             "secondValue": 4
+           }
+         </code>
+
+         <p>A ordem dos parâmetros não importa. O serviço irá responder
+           em formato JSON com o resultado da operação.
+           Um exemplo do retorno pode ser visto a seguir:</p>
+
+         <code>
+           {
+             "type" : "sum",
+             "firstValue": 2,
+             "secondValue": 4,
+             "result": 6
+           }
+         </code>
+
+         <h3> Parâmetros válidos </h3>
+
+           <ul>
+             <li>"type"
+               <ul>
+                 <li>"sum"</li>
+                 <li>"multiply"</li>
+                 <li>"divide"</li>
+                 <li>"subtract"</li>
+               </ul>
+             </li>
+             <li>"firstValue"
+               <ul>
+                 <li>Qualquer valor dentre o conjunto dos números reais R = {… -4, -3, -2, -1,23, 0, + 1, 1, 2, 3,34527..., 5 , 6 , 7} </li>
+               </ul>
+             </li>
+             <li>"secondValue"
+               <ul>
+                 <li>Qualquer valor dentre o conjunto dos números reais R = {… -4, -3, -2, -1,23, 0, + 1, 1, 2, 3,34527..., 5 , 6 , 7} </li>
+               </ul>
+             </li>
+           </ul>
+
+         <h3>Exceções de result</h3>
+           <ul>
+             <li>Divisão por zero: Toda divisão por zero (0) retornará result = 0</li>
+           </ul>
+
+       </div>
+
+       <div id="footer">
+
+       </div>
+     </div>
