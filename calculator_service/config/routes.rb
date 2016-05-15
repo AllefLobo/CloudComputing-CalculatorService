@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 	get "/" => "calculator#index"
 
+	get "/calculator/imc" => "calculator#imc"
+
 	resources :calculator, :only => [:index, :new, :create]
 
 
