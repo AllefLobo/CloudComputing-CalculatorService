@@ -42,13 +42,11 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		params = {
-    "peso" => @peso,
-    "altura" => @altura
-  	}
-		response = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
-		responseJson = JSON.parse(response.body)
-		@imc = responseJson
+		params = {:peso => @peso, :altura => @altura}
+
+		response = post "http://aviator1.cloudapp.net/imc/calcular", params.to_json, {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json'}
+
+		@imc = response.body
 	end
 
 end
