@@ -1,0 +1,7 @@
+Sun, 15 May 2016 17:16:51 -0300
+README.rdoc	Sun, 15 May 2016 02:30:54 -0300
+app/controllers/application_controller.rb	Sun, 15 May 2016 02:30:54 -0300
+app/controllers/calculator_controller.rb	Sun, 15 May 2016 16:57:41 -0300
+app/helpers/application_helper.rb	Sun, 15 May 2016 02:30:54 -0300
+app/helpers/calculator_helper.rb	Sun, 15 May 2016 02:30:54 -0300
+app/models/operation.rb	Sun, 15 May 2016 02:30:54 -0300
