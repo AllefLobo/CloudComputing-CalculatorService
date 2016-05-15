@@ -45,7 +45,7 @@ class CalculatorController < ApplicationController
 
 		uri = URI('=http://aviator1.cloudapp.net/imc/calcular')
 		req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
-		req.body = {"peso": @peso, "altura": @altura}.to_json
+		req.body = {:peso=> @peso, :altura=> @altura}.to_json
 		res = Net::HTTP.start(uri.hostname, uri.port) do |http|
   		http.request(req)
 		end
