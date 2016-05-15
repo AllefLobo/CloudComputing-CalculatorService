@@ -1,5 +1,5 @@
-require "uri"
-require "net/http"
+require 'net/http'
+require 'net/https'
 
 class CalculatorController < ApplicationController
 
@@ -41,12 +41,11 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		params =  {
-    'peso' => @peso,
-    'altura' => @altura
-  	}
-		@imc = Net::HTTP.post_form(URI.parse('http://aviator1.cloudapp.net/imc/calcular'), params)
-		#@imc = response["imc"]
+
+		uri = URI('http://aviator1.cloudapp.net/imc/calcular')
+		response = Net::HTTP.post_form(uri, "peso" => @peso, "altura" => @altura )
+
+		@imc = response["imc"]
 	end
 
 end
