@@ -52,7 +52,7 @@ class CalculatorController < ApplicationController
 		http = Net::HTTP.new(uri.host, uri.port)
 		response = http.request(request)
 
-		@resultadoImc = response
+		@resultadoImc = response.body
 	end
 
 end
