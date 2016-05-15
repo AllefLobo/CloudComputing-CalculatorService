@@ -40,19 +40,18 @@ class CalculatorController < ApplicationController
 		@peso = params["peso"].to_f
 		@altura = params["altura"].to_f
 
-		@toSend = {
-    "peso" => @peso,
-    "altura" => @altura
-		}.to_json
-
 		uri = URI.parse("http://aviator1.cloudapp.net/imc/calcular")
-		https = Net::HTTP.new(uri.host,uri.port)
-		https.use_ssl = true
-		req = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
-		req.body = "[ #{@toSend} ]"
-		res = https.request(req)
 
-		@imc = res
+		http = Net::HTTP.new(uri.host, uri.port)
+
+		request = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
+		request.set_form_data({"peso"=> @peso, "altura"=> @altura}.to_json)
+
+		response = http.request(request)
+
+		#render :json => response.body
+
+		@resultadoImc = response.body
 
 	end
 
