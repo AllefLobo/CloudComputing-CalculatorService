@@ -8,7 +8,7 @@ class CalculatorController < ApplicationController
     @secondValue = params["secondValue"].to_f
     @type = params["type"]
 
-		if @secondValue == 0.0 @type == "divide"
+		if @secondValue == 0.0
 			@result = 0.0
 		else
     	operation = Operation.new( params["type"], @firstValue, @secondValue)
@@ -21,7 +21,7 @@ class CalculatorController < ApplicationController
     @secondValue = params["secondValue"].to_f
     @type = params["type"]
 
-		if @secondValue == 0.0 && @type == "divide"
+		if @secondValue == 0.0 && 
 			result = 0.0
 		else
 			operation = Operation.new( @type, @firstValue, @secondValue)
